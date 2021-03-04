@@ -1,13 +1,20 @@
 from django.db import models
 
 
+# Model模型
+
 # Create your models here.
 
 # 创建用户表
 class UserInfo(models.Model):
-    username = models.CharField(verbose_name='用户名', max_length=32, db_index=True)  # db_index=True创建索引
+    """  创建用户表 """
+    # 用户名
+    username = models.CharField(verbose_name='用户名', max_length=32, db_index=True)  # db_index=True表示创建索引
+    # 邮箱
     email = models.EmailField(verbose_name='邮箱', max_length=32)  # EmailField定义了邮箱的正则表达式
+    # 手机号
     mobile_phone = models.CharField(verbose_name='手机号', max_length=32)
+    # 密码
     password = models.CharField(verbose_name='密码', max_length=32)
 
 
@@ -47,12 +54,17 @@ class Transaction(models.Model):
     user = models.ForeignKey(verbose_name='用户', to='UserInfo')
     price_policy = models.ForeignKey(verbose_name='价格策略', to='PricePolicy')
 
-    count = models.IntegerField(verbose_name='数量（年）', help_text='0表示无限期')
+    count = models.IntegerField(verbose_name='数量/（年）', help_text='0表示无限期')
     price = models.IntegerField(verbose_name='实际支付价格')
 
-    start_datetime = models.DateTimeField(verbose_name='开始时间', null=True, blank=True)
-    end_datetime = models.DateTimeField(verbose_name='结束时间', null=True, blank=True)
-    create_datetime = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+    start_datetime = models.DateTimeField(verbose_name='开始时间',
+                                          null=True,
+                                          blank=True)  # null=True因为可能存在创建了订单但是是未支付的状态
+    end_datetime = models.DateTimeField(verbose_name='结束时间',
+                                        null=True,
+                                        blank=True)
+    create_datetime = models.DateTimeField(verbose_name='创建时间',
+                                           auto_now_add=True)
 
 
 # 项目表

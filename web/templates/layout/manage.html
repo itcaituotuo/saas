@@ -1,3 +1,4 @@
+{#后台管理的母版#}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,6 +7,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'plugin/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugin/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/manage.css' %}">
     <style>
         {#取消圆角#}
         .navbar-default {
@@ -16,8 +18,10 @@
 </head>
 <body>
 {#导航栏#}
-<nav class="navbar navbar-default">
-    <div class="container">
+{#navbar navbar-inverse黑色主题#}
+{#navbar navbar-av自定义主题#}
+<nav class="navbar navbar-av">
+    <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -27,25 +31,42 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'index' %}">CHS-Tracer</a>
+            <a class="navbar-brand" href="{% url 'project_list' %}">CHS-Tracer</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class=""><a href="#">产品功能 <span class="sr-only">(current)</span></a></li>
-                <li class=""><a href="#">企业方案 <span class="sr-only">(current)</span></a></li>
-                <li class=""><a href="#">帮助文档 <span class="sr-only">(current)</span></a></li>
-                <li class=""><a href={% url 'price' %}>价格 <span class="sr-only">(current)</span></a></li>
-            </ul>
+        <ul class="nav navbar-nav">
+            <li class="dropdown active">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">项目 <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
+                </ul>
+            </li>
+        </ul>
 
+        <!-- 导航栏右侧 -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="#">工作台</a></li>
+                <li><a href="#">日历</a></li>
+                <li><a href="#"><i class="fa fa-ravelry" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i></a></li>
+
+                <!-- 判断用户是否登录，若登录显示用户名，若未登录显示登录、注册 -->
+                <!--  web/middleware/auth.py -->
                 {% if request.tracer %}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{ request.tracer.username }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'project_list' %}">管理中心</a></li>
+                            <li><a href="{% url 'index' %}">官网主页</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{% url 'logout' %}">退出登录</a></li>
                         </ul>
@@ -54,17 +75,18 @@
                     <li><a href="{% url 'login' %}">登录</a></li>
                     <li><a href="{% url 'register' %}">注册</a></li>
                 {% endif %}
+
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
+
 {% block content %}{% endblock %}
 
 {#jquery必须要bootstrap之上#}
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'plugin/bootstrap/js/bootstrap.min.js' %}"></script>
 {% block js %}{% endblock %}
-
 
 </body>
 </html>

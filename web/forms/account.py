@@ -2,6 +2,7 @@
 # 作者：IT小学生蔡坨坨
 # 时间：2020/12/4 15:53
 
+# ModelForm页面字段
 
 from django import forms
 from web import models
@@ -11,7 +12,6 @@ import random
 from utils.tencent.sms import send_sms_single
 from django.conf import settings
 from utils import encrypt
-from django_redis import get_redis_connection
 from web.forms.bootstrap import BootStrapForm
 
 import redis

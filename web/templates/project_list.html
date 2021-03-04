@@ -1,0 +1,19 @@
+{#继承manage.html母版#}
+{% extends 'layout/manage.html' %}
+
+{% block css %}
+    <style>
+        .project {
+            margin-top: 20px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+    <!--ccontainer-fluid表示平铺-->
+    <div class="container-fluid">
+        <a class="btn btn-group-vertical project"><i class="fa fa-plus-square" aria-hidden="true"></i> 创建项目</a>
+
+    </div>
+{% endblock %}

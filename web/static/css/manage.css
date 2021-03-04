@@ -23,8 +23,8 @@ body {
 }
 
 .navbar-av {
-    background-color: #499ef3;
-    border-color: #499ef3;
+    background-color: #43CD80;
+    border-color: #43CD80;
 }
 
 .navbar-av .navbar-brand {
@@ -35,7 +35,7 @@ body {
 .navbar-av .navbar-brand:hover,
 .navbar-av .navbar-brand:focus {
     color: #ffffff;
-    background-color: #4dabff;
+    background-color: #4EEE94;
 }
 
 .navbar-av .navbar-text {
@@ -54,7 +54,7 @@ body {
 
 .navbar-av .navbar-nav > li > a {
     color: #ffffff;
-    background-color: #499ef3;
+    background-color: #4EEE94;
     padding-left: 13px;
     padding-right: 13px;
 
@@ -63,7 +63,7 @@ body {
 .navbar-av .navbar-nav > li > a:hover,
 .navbar-av .navbar-nav > li > a:focus {
     color: #ffffff;
-    background-color: #4dabff;
+    background-color: #4EEE94;
 
 }
 
@@ -71,7 +71,7 @@ body {
 .navbar-av .navbar-nav > .active > a:hover,
 .navbar-av .navbar-nav > .active > a:focus {
     color: #ffffff;
-    background-color: #4dabff;
+    background-color: #4EEE94;
 
 }
 

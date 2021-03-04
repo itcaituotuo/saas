@@ -2,7 +2,9 @@
 # 作者：IT小学生蔡坨坨
 # 时间：2020/12/9 20:11
 
-import base
+# 初始化价格策略
+
+from script import base
 from web import models
 
 

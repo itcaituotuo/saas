@@ -8,12 +8,13 @@ from django.shortcuts import render, HttpResponse, redirect
 from web.forms.account import RegisterModelForm, SendSmsForm, LoginSMSForm, LoginForm
 from django.http import JsonResponse
 from web import models
-from django.conf import settings
+import uuid
+import datetime
 
 
-# 注册
+# 用户注册
 def register(request):
-    """ 注册 """
+    """ 用户注册 """
     if request.method == 'GET':
         form = RegisterModelForm()
         return render(request, 'register.html', {'form': form})
@@ -27,8 +28,22 @@ def register(request):
         # instance = models.UserInfo.objects.create(**data)
 
         # save()方法只会将ModelForm中定义的字段存入数据库，自动去除code和confirm_password
-        # 用户表中新建一条数据（注册）
-        form.save()
+        # 用户表中新建了一条数据（用户注册）
+        instance = form.save()
+
+        # 创建一条价格策略，免费版
+        policy_object = models.PricePolicy.objects.filter(category=1, title='个人免费版').first()
+
+        # 创建交易记录，新用户注册便创建一条交易记录，表示免费的额度
+        models.Transaction.objects.create(
+            status=2,  # 订单状态，已支付
+            order=str(uuid.uuid4()),  # 订单号，根据当前时间和网卡生成一个随机字符串，理论上是不会重复的
+            user=instance,  # 当前用户为刚注册的用户
+            price_policy=policy_object,  # 价格策略
+            count=0,  # 数量（年），0表示无限期
+            price=0,  # 实际支付价格
+            start_datetime=datetime.datetime.now()  # 开始时间为注册时间，因为免费额度注册即可使用
+        )
         return JsonResponse({'status': True, 'data': '/login/'})
 
     return JsonResponse({'status': False, 'error': form.errors})
@@ -127,9 +142,9 @@ def image_code(request):
     return HttpResponse(data)
 
 
-# 退出
+# 退出登录
 def logout(request):
-    """  退出 """
+    """  退出登录 """
     # 将session中的值清空
     request.session.flush()
     return redirect('index')

@@ -47,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     'web.middleware.auth.AuthMiddleware',  # 添加中间件
 ]
 
@@ -74,6 +75,7 @@ WSGI_APPLICATION = 'saas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# 数据库配置
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -131,6 +133,17 @@ TENCENT_SMS_TEMPLATE = {
     'register': 792842,
     'login': 792844
 }
+
+# 白名单，无需登录就可以访问的页面
+WHITE_REGEX_URL_LIST = [
+    '/send/sms/',
+    '/register/',
+    '/login/sms/',
+    '/login/',
+    '/index/',
+    '/image/code/',
+    '/price/',
+]
 
 try:
     from .local_settings import *

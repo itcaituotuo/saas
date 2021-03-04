@@ -1,5 +1,5 @@
-{% extends 'layout/basic.html' %}
-{% load static %}
+{% extends 'layout/basic.html' %}<!--继承母版-->
+{% load static %}<!--将static目录加载进来-->
 
 {% block title %}
     用户注册
@@ -63,10 +63,12 @@
         /*
         页面加载完成之后执行函数
         */
-        $(function () {
-            bindClickBtnSms();
-            bindClickSubmit();
-        });
+        $(
+            function () {
+                bindClickBtnSms();
+                bindClickSubmit();
+            }
+        );
 
         /*
         点击注册的按钮绑定事件

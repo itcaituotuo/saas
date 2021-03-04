@@ -5,7 +5,7 @@
 
 class BootStrapForm(object):
     def __init__(self, *args, **kwargs):
-        """  重写 __init__方法，统计添加样式 """
+        """  重写 __init__方法，统一添加样式 """
         super().__init__(*args, **kwargs)
         # name:字段名
         for name, field in self.fields.items():
